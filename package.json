@@ -1,0 +1,25 @@
+{
+  "name": "18-the-mongo-network",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrSumada/the-mongo-network.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrSumada/the-mongo-network/issues"
+  },
+  "homepage": "https://github.com/MrSumada/the-mongo-network#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mongoose": "^6.2.11"
+  }
+}
