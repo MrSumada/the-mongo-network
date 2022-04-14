@@ -20,6 +20,7 @@
   "homepage": "https://github.com/MrSumada/the-mongo-network#readme",
   "dependencies": {
     "express": "^4.17.3",
-    "mongoose": "^6.2.11"
+    "mongoose": "^6.2.11",
+    "validator": "^13.7.0"
   }
 }

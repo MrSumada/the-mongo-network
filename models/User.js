@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 
-import { isEmail } from 'validator';
+// Ask about why this is affecting module.exports
+// import { isEmail } from 'validator';
 
 const UserSchema = new Schema(
     {
@@ -17,7 +18,7 @@ const UserSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            validate: [ isEmail, 'invalid email']
+            // validate: [ isEmail, 'invalid email']
         },
         thoughts: [
             {
