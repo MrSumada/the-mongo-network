@@ -1,12 +1,12 @@
 // const { ObjectId } = require('bson');
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const { formatTime } = require('../utils/formatTime')
 
 const reactionSchema = new Schema(
     {
         reactionId: {
             type: Schema.Types.ObjectId,
-            default: ObjectId
+            default: () => new Types.ObjectId
         },
         reactionBody: {
             type: String,
