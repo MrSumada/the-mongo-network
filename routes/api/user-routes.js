@@ -17,3 +17,5 @@ router
     // check if findOneAnd Update works for these
     .post(addFriend)
     .delete(deleteFriend)
+
+module.exports = router;

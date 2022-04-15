@@ -28,7 +28,8 @@ const reactionSchema = new Schema(
 const ThoughtSchema = new Schema(
     {
         id: {
-            type: ObjectId
+            type: Schema.Types.ObjectId,
+            default: () => new Types.ObjectId
         },
         thoughtText: {
             type: String,
