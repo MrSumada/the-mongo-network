@@ -4,20 +4,20 @@ const { getAllThoughts, postNewThought, getThoughtById, updateThought, deleteTho
 router
     .route('/')
     .get(getAllThoughts)
-    .post(postNewThought)
+    .post(postNewThought);
 
 router
     .route('/:id')
     .get(getThoughtById)
     .put(updateThought)
-    .delete(deleteThought)
+    .delete(deleteThought);
 
 router
     .route('/:thoughtId/reactions')
-    .put(postNewReaction)
+    .put(postNewReaction);
 
 router
     .route('/:thoughtId/reactions/:reactionId')
-    .put(deleteReaction)
+    .delete(deleteReaction);
 
 module.exports = router;

@@ -26,7 +26,7 @@ const UserController = {
     postNewUser({ body }, res) {
         User.create(body)
         .then(dbUserData => res.json(dbUserData))
-        .catch(err => res.json(dbUserData))
+        .catch(err => res.json(err))
     },
     updateUserById({ params, body }, res) {
         User.findOneAndUpdate({ _id: params.id}, body, {new: true})

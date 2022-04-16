@@ -1,11 +1,17 @@
-const { process_params } = require('express/lib/router');
+// const { process_params } = require('express/lib/router');
 const { Thought, User } = require('../models');
 
 const thoughtController = {
     getAllThoughts(req, res) {
         Thought.find({})
+        .populate ({
+            path: 'reactions'
+        })
         .then(dbThoughtData => res.json(dbThoughtData))
-        .catch(err => res.status(400).json(err))
+        .catch(err => {
+            console.log(err);
+            res.status(400).json(err);
+        })
     },
     getThoughtById({ params }, res) {
         Thought.findOne({ _id: params.id })
@@ -60,7 +66,7 @@ const thoughtController = {
     },
     postNewReaction({ params, body }, res) {
         Thought.findOneAndUpdate(
-            { _id: params.thoughtId},
+            { _id: params.thoughtId },
             { $push: { reactions: body }},
             { new: true }
             )
@@ -76,9 +82,17 @@ const thoughtController = {
     deleteReaction({ params }, res) {
         Thought.findOneAndUpdate(
             { _id: params.thoughtId},
-            { $pull: { reactions: params.reactionId }},
+            { $pull: { reactions: { reactionId: params.reactionId }}},
             { new: true }
-        )
+            )
+            .then(dbThoughtData => {
+                if (!dbThoughtData) {
+                    res.status(404).json({ message: "No thought found with this id" });
+                    return;
+                }
+                res.json(dbThoughtData);
+            })
+            .catch(err => res.json(err));
     }
 }
 

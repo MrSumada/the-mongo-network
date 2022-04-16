@@ -1,6 +1,5 @@
-// const { ObjectId } = require('bson');
 const { Schema, model, Types } = require('mongoose');
-const { formatTime } = require('../utils/formatTime')
+const formatTime = require('../utils/formatTime.js');
 
 const reactionSchema = new Schema(
     {
@@ -19,18 +18,23 @@ const reactionSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: Date.now
+            default: Date.now,
+            get: createdAtVal => formatTime(createdAtVal)
+        }
+    },
+    {
+        toJSON: {
+            getters: true
         }
     }
-)
-
+);
 
 const ThoughtSchema = new Schema(
     {
-        id: {
-            type: Schema.Types.ObjectId,
-            default: () => new Types.ObjectId
-        },
+        // id: {
+        //     type: Schema.Types.ObjectId,
+        //     default: () => new Types.ObjectId
+        // },
         thoughtText: {
             type: String,
             maxLength: 280,
@@ -40,7 +44,7 @@ const ThoughtSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            get: (createdAtVal) => formatTime(createdAtVal)
+            get: createdAtVal => formatTime(createdAtVal)
         },
         username: {
             type: String,
