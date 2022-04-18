@@ -1,11 +1,8 @@
 const { Schema, model, Types } = require('mongoose');
+const Thought = require('./Thought')
 
 const UserSchema = new Schema(
     {
-        // id: {
-        //     type: Schema.Types.ObjectId,
-        //     default: () => new Types.ObjectId()
-        // },
         username: {
             type: String,
             unique: true,
@@ -21,7 +18,7 @@ const UserSchema = new Schema(
         thoughts: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Thought'
+                ref: 'Thought',
             }
         ],
         friends: [
@@ -44,5 +41,11 @@ UserSchema.virtual('friendCount').get(function() {
 })
 
 const User = model('User', UserSchema);
+
+UserSchema.pre('deleteMany', function(next) {
+    // var user = this;/
+    Thought.deleteMany({ _id: this.thoughts._id }).exec();
+    next();
+});
 
 module.exports = User;

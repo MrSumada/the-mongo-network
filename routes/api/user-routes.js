@@ -14,7 +14,6 @@ router
 
 router
     .route('/:userId/friends/:friendId')
-    // check if findOneAnd Update works for these
     .post(addFriend)
     .delete(deleteFriend)
 
