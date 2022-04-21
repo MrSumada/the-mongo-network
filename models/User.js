@@ -40,12 +40,13 @@ UserSchema.virtual('friendCount').get(function() {
     return this.friends.length;
 })
 
-const User = model('User', UserSchema);
 
-UserSchema.pre('deleteMany', function(next) {
-    // var user = this;/
-    Thought.deleteMany({ _id: this.thoughts._id }).exec();
+// My attempt to CASCADE the deleteUserByID to also delete the User's Thoughts.
+UserSchema.post('remove', async function(res, next) {
+    await Thought.deleteMany({ user_id: this._id }).exec();
     next();
 });
+
+const User = model('User', UserSchema);
 
 module.exports = User;
